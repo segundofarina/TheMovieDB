@@ -8,9 +8,51 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject var viewModel = MoviesListViewModel()
+  @StateObject var moviesViewModel = MoviesListViewModel()
+  @StateObject var searchViewModel = SearchViewModel()
   
   init() {
+    self.initNavigationBarAppearance()
+  }
+  
+  var body: some View {
+    NavigationStack {
+      Group {
+        if(searchViewModel.searchQuery != "") {
+          SearchListView(movies: searchViewModel.searchedResults,
+                         isMovieInWatchList: { moviesViewModel.isMovieInWatchList(movie: $0) },
+                         addMovieToWatchList: { moviesViewModel.addToWatchList(movie: $0) },
+                         loading: searchViewModel.state == .fetching
+          )
+        } else  {
+          MoviesListView(
+            watchlist: moviesViewModel.watchlist,
+            popular: moviesViewModel.popular,
+            genres: moviesViewModel.genres
+          )
+        }
+      }
+      .edgesIgnoringSafeArea([.bottom])
+      .navigationDestination(for: Movie.self) { movie in
+        MovieDetailView(
+          movie: movie,
+          addToWatchList: { moviesViewModel.addToWatchList(movie: movie) },
+          removeFromWatchList: { moviesViewModel.removeFromWatchList(movie: movie) },
+          isOnWatchList: moviesViewModel.isMovieInWatchList(movie: movie)
+        )
+      }
+      .searchable(text: $searchViewModel.searchQuery)
+      .background(Color.BackgroundListView)
+      .preferredColorScheme(.dark)
+      .onAppear {
+        moviesViewModel.fetchInitialData()
+      }
+      
+    }
+    
+  }
+  
+  private func initNavigationBarAppearance() {
     let navBarAppearance = UINavigationBarAppearance()
     navBarAppearance.configureWithDefaultBackground()
     navBarAppearance.backgroundColor = UIColor(Color.BackgroundListView)
@@ -20,49 +62,10 @@ struct ContentView: View {
     UINavigationBar.appearance().standardAppearance = navBarAppearance
   }
   
-  var body: some View {
-    NavigationStack {
-      Group {
-        if(viewModel.searchQuery != "") {
-          SearchListView(movies: viewModel.searchedResults,
-                         isMovieInWatchList: { viewModel.watchlist.contains($0) },
-                         addMovieToWatchList: { viewModel.addToWatchList(movie: $0)},
-                         loading: viewModel.searchedResults.count == 0
-                         
-          )
-        } else  {
-          MoviesListView(
-            watchlist: viewModel.watchlist,
-            popular: viewModel.popular,
-            genres: viewModel.genres
-          )
-        }
-      }
-      .edgesIgnoringSafeArea([.bottom])
-     
-      .navigationDestination(for: Movie.self) { movie in
-        MovieDetailView(
-          movie: movie,
-          addToWatchList: { viewModel.addToWatchList(movie: movie) },
-          removeFromWatchList: { viewModel.removeFromWatchList(movie: movie) },
-          isOnWatchList: viewModel.watchlist.contains(movie)
-        )
-      }
-      .searchable(text: $viewModel.searchQuery)
-      .foregroundColor(.white)
-      .background(Color.BackgroundListView)
-      .onAppear {
-        viewModel.fetchInitialData()
-      }
-      .preferredColorScheme(.dark)
-    }
-    
-  }
-  
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+  static var previews: some View {
+    ContentView()
+  }
 }

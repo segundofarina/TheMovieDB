@@ -31,6 +31,7 @@
 		79435CC529BFAC01004BB2DD /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79435CC429BFAC01004BB2DD /* MoviesService.swift */; };
 		7952EC6029C12CE900BE3F92 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC5F29C12CE900BE3F92 /* SearchListView.swift */; };
 		7952EC6229C275D500BE3F92 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6129C275D500BE3F92 /* SearchListCell.swift */; };
+		7952EC6529C3A7C100BE3F92 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6429C3A7C100BE3F92 /* SearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		7952EC5F29C12CE900BE3F92 /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		7952EC6129C275D500BE3F92 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		7952EC6329C3554B00BE3F92 /* sample.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = sample.xcconfig; sourceTree = "<group>"; };
+		7952EC6429C3A7C100BE3F92 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 			children = (
 				7952EC5F29C12CE900BE3F92 /* SearchListView.swift */,
 				7952EC6129C275D500BE3F92 /* SearchListCell.swift */,
+				7952EC6429C3A7C100BE3F92 /* SearchViewModel.swift */,
 			);
 			path = SearchList;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				7904EAC229BB818F008BA747 /* APIClient.swift in Sources */,
 				7904EACB29BB8D0A008BA747 /* NetworkClient.swift in Sources */,
 				79435CC229BBD71F004BB2DD /* Color+Extensions.swift in Sources */,
+				7952EC6529C3A7C100BE3F92 /* SearchViewModel.swift in Sources */,
 				7904EAC629BB8484008BA747 /* Response.swift in Sources */,
 				79435CBF29BBD230004BB2DD /* PopularMovieCell.swift in Sources */,
 				79435CC529BFAC01004BB2DD /* MoviesService.swift in Sources */,

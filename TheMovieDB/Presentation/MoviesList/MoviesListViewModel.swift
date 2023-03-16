@@ -15,20 +15,11 @@ class MoviesListViewModel: ObservableObject {
   @Published var popular: [Movie] = []
   @Published var genres: [Genre] = []
   
-  @Published var searchedResults: [Movie] = []
-  @Published var searchQuery = ""
-  
   private let apiClient: APIClient
-  private var cancellables = Set<AnyCancellable>()
+ 
   
   init(apiClient: APIClient = APIClient.shared) {
     self.apiClient = apiClient
-    $searchQuery
-      .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
-      .sink { [weak self] query in
-        self?.searchForMovie(query: query)
-      }
-      .store(in: &cancellables)
   }
   
   func fetchInitialData() {
@@ -44,14 +35,16 @@ class MoviesListViewModel: ObservableObject {
     }
   }
   
+  public func isLastMovie(movie: Movie) -> Bool {
+    popular.last?.id == movie.id
+  }
+  
   public func removeFromWatchList(movie: Movie) {
     watchlist.removeAll(where: {$0.id == movie.id})
   }
   
-  private func searchForMovie(query: String) {
-    Task {
-      self.searchedResults = try await apiClient.searchForMovie(query: query).results
-    }
+  public func isMovieInWatchList(movie: Movie) -> Bool {
+    return watchlist.contains(movie)
   }
   
 }
