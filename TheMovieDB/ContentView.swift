@@ -8,15 +8,53 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+  @StateObject var viewModel = MoviesListViewModel()
+  
+  init() {
+    let navBarAppearance = UINavigationBarAppearance()
+    navBarAppearance.configureWithTransparentBackground()
+    navBarAppearance.backgroundColor = UIColor(Color.BackgroundListView)
+    UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+  }
+  
+  var body: some View {
+    NavigationStack {
+      Group {
+        if(viewModel.searchQuery != "") {
+          SearchListView(movies: viewModel.searchedResults,
+                         isMovieInWatchList: { viewModel.watchlist.contains($0) },
+                         addMovieToWatchList: { viewModel.addToWatchList(movie: $0)},
+                         loading: viewModel.searchedResults.count == 0
+                         
+          )
+        } else  {
+          MoviesListView(
+            watchlist: viewModel.watchlist,
+            popular: viewModel.popular,
+            genres: viewModel.genres
+          )
         }
-        .padding()
+      }
+      .edgesIgnoringSafeArea([.bottom])
+     
+      .navigationDestination(for: Movie.self) { movie in
+        MovieDetailView(
+          movie: movie,
+          addToWatchList: { viewModel.addToWatchList(movie: movie) },
+          removeFromWatchList: { viewModel.removeFromWatchList(movie: movie) },
+          isOnWatchList: viewModel.watchlist.contains(movie)
+        )
+      }
+      .searchable(text: $viewModel.searchQuery)
+      .foregroundColor(.white)
+      .background(Color.BackgroundListView)
+      .onAppear {
+        viewModel.fetchInitialData()
+      }
     }
+    
+  }
+  
 }
 
 struct ContentView_Previews: PreviewProvider {
