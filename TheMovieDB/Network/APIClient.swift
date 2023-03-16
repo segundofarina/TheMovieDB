@@ -7,22 +7,38 @@
 
 import Foundation
 
-
-protocol APIClient {
-  func sendRequest(endpoint:Endpoint) async -> Response
-}
-
-struct URLSessionAPIClient: APIClient {
+class APIClient {
   
-  private let session = URLSession.shared
+  static let shared = APIClient(networkClient: URLSessionNetworkClient())
   
-  func sendRequest(endpoint:Endpoint) async -> Response {
-    do {
-      let (data, res) = try await session.data(for: endpoint.asRequest())
-      return Response(data: data, response: res, path: endpoint.url.relativePath, error: nil )
-      
-    } catch {
-      return Response(path: endpoint.url.relativePath, error: error)
-    }
+  private let networkClient: NetworkClient
+  
+  init(networkClient: NetworkClient) {
+    self.networkClient = networkClient
   }
+  
+  func getPopularMovies() async throws -> MovieList {
+    let endpoint = Endpoint(path: "/movie/popular")
+    return try await networkClient
+      .sendRequest(endpoint: endpoint)
+      .onStatus(200, decodeUsing: MovieList.self)
+  }
+  
+  func getMovieGenres()  async throws -> [Genre] {
+    let endpoint = Endpoint(path: "/genre/movie/list")
+    
+    return try await networkClient
+      .sendRequest(endpoint: endpoint)
+      .onStatus(200, decodeUsing: GenreList.self)
+      .genres
+  }
+  
+  func searchForMovie(query: String) async throws -> MovieList {
+    let endpoint = Endpoint(path: "/search/movie")
+      .query(key: "query", value: query)
+    return try await networkClient
+      .sendRequest(endpoint: endpoint)
+      .onStatus(200, decodeUsing: MovieList.self)
+  }
+  
 }

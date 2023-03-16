@@ -16,7 +16,7 @@ struct Endpoint {
     "content-type":"application/json;charset=utf-8"]
   
   static let scheme = "https"
-  static let host = ""
+  static let host = "api.themoviedb.org"
   
   
   enum Method: String {
@@ -42,6 +42,7 @@ struct Endpoint {
     var components = URLComponents()
     components.scheme = Self.scheme
     components.host = Self.host
+    components.path = "/3"
     
     
     guard let validURL = components.url?.appendingPathComponent(path) else {
