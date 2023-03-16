@@ -6,5 +6,5 @@ xcuserdata/
 *.xccheckout
 
 ## Config files
-*.xconfig
-!sample.xconfig
+*.xcconfig
+!sample.xcconfig
