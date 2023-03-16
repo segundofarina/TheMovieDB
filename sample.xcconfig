@@ -1,0 +1,14 @@
+//
+//  sample.xcconfig
+//  TheMovieDB
+//
+//  Created by Segundo Fariña on 16/03/2023.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// sample configuration file, create a new config file and fill in the api token
+// Go to project inspector, TheMoveDB > Info tab > configurations > select your new config file
+
+API_TOKEN = INSERT API TOKEN HERE IN PLAIN TEXT
