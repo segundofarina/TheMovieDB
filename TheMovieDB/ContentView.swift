@@ -12,9 +12,12 @@ struct ContentView: View {
   
   init() {
     let navBarAppearance = UINavigationBarAppearance()
-    navBarAppearance.configureWithTransparentBackground()
+    navBarAppearance.configureWithDefaultBackground()
     navBarAppearance.backgroundColor = UIColor(Color.BackgroundListView)
     UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+    UINavigationBar.appearance().compactScrollEdgeAppearance = navBarAppearance
+    UINavigationBar.appearance().compactAppearance = navBarAppearance
+    UINavigationBar.appearance().standardAppearance = navBarAppearance
   }
   
   var body: some View {
@@ -51,6 +54,7 @@ struct ContentView: View {
       .onAppear {
         viewModel.fetchInitialData()
       }
+      .preferredColorScheme(.dark)
     }
     
   }
