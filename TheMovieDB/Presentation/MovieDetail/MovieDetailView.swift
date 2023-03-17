@@ -15,16 +15,7 @@ struct MovieDetailView: View {
   
  
   var image: some View {
-    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w300/\(movie.posterPath ?? "")")) {
-      image in image.resizable()
-    } placeholder: {
-      ZStack {
-        Text(movie.title)
-          .opacity(0.2)
-        ProgressView()
-      }
-      .foregroundColor(.white)
-    }
+    CacheAsyncImage(url: "https://image.tmdb.org/t/p/w300/\(movie.posterPath ?? "")")
     .frame(width: 150, height: 230)
   }
   

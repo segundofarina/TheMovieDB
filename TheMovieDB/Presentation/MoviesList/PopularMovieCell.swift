@@ -36,17 +36,9 @@ struct PopularMovieCell: View {
     .padding()
     
     
-    .background(AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w780/\(movie.backdropPath ?? "")")) { image in
-      image
-        .resizable()
-        .scaledToFill()
-    } placeholder: {
-      ZStack {
-        Text(movie.title)
-          .opacity(0.2)
-        ProgressView()
-      }
-    })
+    .background(
+      CacheAsyncImage(url: "https://image.tmdb.org/t/p/w780/\(movie.backdropPath ?? "")")
+      )
     .frame(height: 156)
     .frame(maxWidth: .infinity)
     .clipped()

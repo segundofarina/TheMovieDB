@@ -8,7 +8,7 @@
 import Foundation
 
 
-class MoviePersistence {
+struct MoviePersistence {
   struct WatchlistDiskOperator: DiskOperator {
     typealias Model = [Movie]
     let fileName: String = "Watchlist"
@@ -21,7 +21,6 @@ class MoviePersistence {
   }
   
   func saveWatchlist(watchlist: [Movie]) async {
-    print("Saving watchlist")
     try? await diskOperator.save(model: watchlist)
   }
 }
