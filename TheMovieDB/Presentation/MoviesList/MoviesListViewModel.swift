@@ -17,6 +17,7 @@ class MoviesListViewModel: ObservableObject {
   
   private let apiClient: APIClient
   private var currentPage = 0
+  private let moviePersistence: MoviePersistence = MoviePersistence()
   
   var state: State = .idle
   
@@ -26,14 +27,20 @@ class MoviesListViewModel: ObservableObject {
   
   func fetchInitialData() {
     if state != .idle { return }
+    print("Fetch initial data")
     Task {
+      self.state = .fetching
       let list = try await apiClient.getPopularMovies()
       self.popular = list.results
       if let page = list.page {
         self.currentPage = page
       }
       self.genres = try await apiClient.getMovieGenres()
+      self.watchlist = await moviePersistence.getWatchlist()
+      self.state = .fetched
     }
+    
+
   }
   
   public func addToWatchList(movie: Movie) {
@@ -66,6 +73,12 @@ class MoviesListViewModel: ObservableObject {
       if let page = list.page {
         self.currentPage = page
       }
+    }
+  }
+  
+  public func persist() {
+    Task {
+      await moviePersistence.saveWatchlist(watchlist: watchlist)
     }
   }
   

@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject var moviesViewModel = MoviesListViewModel()
-  @StateObject var searchViewModel = SearchViewModel()
+  @StateObject private var moviesViewModel = MoviesListViewModel()
+  @StateObject private var searchViewModel = SearchViewModel()
+  
+  @Environment(\.scenePhase) private var scenePhase
+  
   
   init() {
     self.initNavigationBarAppearance()
@@ -48,6 +51,9 @@ struct ContentView: View {
       .preferredColorScheme(.dark)
       .onAppear {
         moviesViewModel.fetchInitialData()
+      }
+      .onChange(of: scenePhase) { phase in
+        if phase == .inactive { moviesViewModel.persist() }
       }
       
     }

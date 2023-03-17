@@ -32,6 +32,8 @@
 		7952EC6029C12CE900BE3F92 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC5F29C12CE900BE3F92 /* SearchListView.swift */; };
 		7952EC6229C275D500BE3F92 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6129C275D500BE3F92 /* SearchListCell.swift */; };
 		7952EC6529C3A7C100BE3F92 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6429C3A7C100BE3F92 /* SearchViewModel.swift */; };
+		7952EC6729C4B1A800BE3F92 /* MoviePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6629C4B1A800BE3F92 /* MoviePersistence.swift */; };
+		7952EC6929C4B3B600BE3F92 /* MoviePersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6829C4B3B600BE3F92 /* MoviePersistenceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		7952EC6129C275D500BE3F92 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		7952EC6329C3554B00BE3F92 /* sample.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = sample.xcconfig; sourceTree = "<group>"; };
 		7952EC6429C3A7C100BE3F92 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		7952EC6629C4B1A800BE3F92 /* MoviePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePersistence.swift; sourceTree = "<group>"; };
+		7952EC6829C4B3B600BE3F92 /* MoviePersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePersistenceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,7 @@
 				79132B4A29C0EFD2006B9D50 /* Info.plist */,
 				7904EAA729BB7DC3008BA747 /* TheMovieDBTests.swift */,
 				79132B4829C0EDD0006B9D50 /* NetworkTests.swift */,
+				7952EC6829C4B3B600BE3F92 /* MoviePersistenceTests.swift */,
 			);
 			path = TheMovieDBTests;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				79435CC429BFAC01004BB2DD /* MoviesService.swift */,
+				7952EC6629C4B1A800BE3F92 /* MoviePersistence.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 				7952EC6529C3A7C100BE3F92 /* SearchViewModel.swift in Sources */,
 				7904EAC629BB8484008BA747 /* Response.swift in Sources */,
 				79435CBF29BBD230004BB2DD /* PopularMovieCell.swift in Sources */,
+				7952EC6729C4B1A800BE3F92 /* MoviePersistence.swift in Sources */,
 				79435CC529BFAC01004BB2DD /* MoviesService.swift in Sources */,
 				7904EAD129BB8DEA008BA747 /* MovieList.swift in Sources */,
 				7904EAC829BB84AB008BA747 /* APIError.swift in Sources */,
@@ -357,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7952EC6929C4B3B600BE3F92 /* MoviePersistenceTests.swift in Sources */,
 				79132B4929C0EDD1006B9D50 /* NetworkTests.swift in Sources */,
 				7904EAA829BB7DC3008BA747 /* TheMovieDBTests.swift in Sources */,
 			);
