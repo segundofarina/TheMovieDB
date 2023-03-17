@@ -12,6 +12,9 @@ struct MoviesListView: View {
   let popular: [Movie]
   let genres: [Genre]
   
+  let fetchMoreMovies:  () async -> Void
+  let isLastMovie: (Movie) -> Bool
+  
   @ViewBuilder var watchlistView: some View {
     VStack (alignment: .leading) {
       Text("Watchlist".uppercased())
@@ -33,14 +36,17 @@ struct MoviesListView: View {
     VStack (alignment: .leading ){
       Text("Popular".uppercased())
         .foregroundColor(.white.opacity(0.56))
-      ScrollView {
-        VStack(spacing: 24) {
-          ForEach(popular, id: \.id) { movie in
-            NavigationLink(value: movie) {
-              PopularMovieCell(
-                movie: movie,
-                genres: genres.filter { movie.genreIds.contains($0.id) }
-              )
+      LazyVStack(spacing: 24) {
+        ForEach(popular, id: \.id) { movie in
+          NavigationLink(value: movie) {
+            PopularMovieCell(
+              movie: movie,
+              genres: genres.filter { movie.genreIds.contains($0.id) }
+            )
+          }
+          .task {
+            if isLastMovie(movie) {
+              await fetchMoreMovies()
             }
           }
         }
@@ -65,7 +71,10 @@ struct MoviesListView_Previews: PreviewProvider {
     MoviesListView(
       watchlist:  [.blackPanther, .creed, .pussInBoots, .antMan, .avatar],
       popular:  [.blackPanther, .creed, .pussInBoots, .antMan, .avatar],
-      genres: []
+      genres: [],
+      fetchMoreMovies: { print("Fetch more") },
+      isLastMovie: { $0.id == Movie.avatar.id }
     )
+    .background(Color.BackgroundListView)
   }
 }

@@ -28,7 +28,9 @@ struct ContentView: View {
           MoviesListView(
             watchlist: moviesViewModel.watchlist,
             popular: moviesViewModel.popular,
-            genres: moviesViewModel.genres
+            genres: moviesViewModel.genres,
+            fetchMoreMovies: moviesViewModel.fetchMoreMovies,
+            isLastMovie: moviesViewModel.isLastMovie
           )
         }
       }

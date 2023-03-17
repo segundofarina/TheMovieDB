@@ -17,8 +17,9 @@ class APIClient {
     self.networkClient = networkClient
   }
   
-  func getPopularMovies() async throws -> MovieList {
+  func getPopularMovies(page: Int = 1) async throws -> MovieList {
     let endpoint = Endpoint(path: "/movie/popular")
+      .query(key: "page", value: "\(page)")
     return try await networkClient
       .sendRequest(endpoint: endpoint)
       .onStatus(200, decodeUsing: MovieList.self)
