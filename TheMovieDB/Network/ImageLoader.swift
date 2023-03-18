@@ -39,7 +39,7 @@ class ImageLoader: ObservableObject {
     
     Task {
       isLoading = true
-      let (data, response) = try await URLSession.shared.data(from: url)
+      let (data, response) = try await URLSession.shared.data(for: request)
       guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
         isLoading = false
         return

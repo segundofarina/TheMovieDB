@@ -13,10 +13,18 @@ struct MovieDetailView: View {
   let removeFromWatchList: () -> Void
   let isOnWatchList: Bool
   
- 
+  var scale: CGFloat {
+    max(min(2 - offset, 2), 1)
+  }
+  
   var image: some View {
-    CacheAsyncImage(url: "https://image.tmdb.org/t/p/w300/\(movie.posterPath ?? "")")
-    .frame(width: 150, height: 230)
+    VStack {
+      Spacer()
+      CacheAsyncImage(url: "https://image.tmdb.org/t/p/w300/\(movie.posterPath ?? "")")
+        .frame(width: scale * 150 , height: scale * 230 )
+    }
+    .frame(width: 2 * 150 , height: 2 * 230 )
+    
   }
   
   var title: some View {
@@ -47,7 +55,7 @@ struct MovieDetailView: View {
   var button: some View {
     Button(action: buttonAction) {
       Text(buttonText.uppercased())
-        .font(.headline)
+        .font(.subheadline)
         .fontWeight(.heavy)
         .bold()
         .padding()
@@ -72,30 +80,39 @@ struct MovieDetailView: View {
     }
   }
   
-    var body: some View {
-      ScrollView {
-        VStack {
-          image
-          title
-          button
-          overView
-         Spacer()
-        }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+  @State var offset: Double = 0
+  
+  var body: some View {
+    ScrollView {
+      VStack {
+        image
+        title
+        button
+        overView
+        Spacer()
       }
-      .background(Color.BackgroundListView)
-      .navigationBarTitleDisplayMode(.inline)
+      .padding()
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .background(GeometryReader { proxy -> Color in
+        DispatchQueue.main.async {
+          offset = (-proxy.frame(in: .named("scroll")).origin.y / 180)
+        }
+        return Color.clear
+      })
     }
+    .coordinateSpace(name: "scroll")
+    .background(Color.BackgroundListView)
+    .navigationBarTitleDisplayMode(.inline)
+  }
 }
 
 struct MovieDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-      MovieDetailView(
-        movie: .avatar,
-        addToWatchList: { print("Add to watchlist") },
-        removeFromWatchList: { print("Remove from watchlist") },
-        isOnWatchList: false
-      )
-    }
+  static var previews: some View {
+    MovieDetailView(
+      movie: .avatar,
+      addToWatchList: { print("Add to watchlist") },
+      removeFromWatchList: { print("Remove from watchlist") },
+      isOnWatchList: false
+    )
+  }
 }
