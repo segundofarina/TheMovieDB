@@ -15,6 +15,7 @@ struct MoviesListView: View {
   let fetchMoreMovies:  () async -> Void
   let isLastMovie: (Movie) -> Bool
   
+  
   @ViewBuilder var watchlistView: some View {
     VStack (alignment: .leading) {
       Text("Watchlist".uppercased())

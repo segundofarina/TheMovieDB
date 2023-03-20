@@ -34,9 +34,8 @@ struct Endpoint {
   private (set) var body: Data?
   
   
-  /// Initialize Endpoint  for POSAdapter using URL path
   /// - Parameters:
-  ///   - path: Path of POSAdapter URL to append to hostname & port
+  ///   - path: Path of API URL to append to hostname & port
   ///   - params: Query parameter key/value pairs
   init(path: String, params: [String:String] = [:]) {
     var components = URLComponents()
@@ -102,16 +101,8 @@ struct Endpoint {
     return newEndpoint
   }
   
-  /// Updates the endpoint to include the 'access-token' header
-  /// - Returns: Endpoint instance
-  func withAuth(accessToken: String) -> Endpoint {
-    var newEndpoint = self
-    newEndpoint.headers.updateValue("Bearer \(accessToken)", forKey: "authorization")
-    return newEndpoint
-  }
-  
   /// Uses data defined in the endpoint properties to create a URLRequest
-  /// - Returns: URLRequest grenerated from the endpoint instance
+  /// - Returns: URLRequest generated from the endpoint instance
   func asRequest() -> URLRequest {
     var request = URLRequest(url: url, timeoutInterval: self.timeout)
     request.httpMethod = "\(self.method)"

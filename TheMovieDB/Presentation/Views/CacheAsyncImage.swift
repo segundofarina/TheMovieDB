@@ -21,8 +21,6 @@ struct CacheAsyncImage: View {
             .scaledToFill()
         } else {
           ZStack {
-//            Text(movie.title)
-//              .opacity(0.2)
             ProgressView()
           }
         }

@@ -24,7 +24,6 @@ struct MovieDetailView: View {
         .frame(width: scale * 150 , height: scale * 230 )
     }
     .frame(width: 2 * 150 , height: 2 * 230 )
-    
   }
   
   var title: some View {

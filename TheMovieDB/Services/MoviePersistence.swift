@@ -9,6 +9,7 @@ import Foundation
 
 
 struct MoviePersistence {
+  
   struct WatchlistDiskOperator: DiskOperator {
     typealias Model = [Movie]
     let fileName: String = "Watchlist"
@@ -39,11 +40,11 @@ protocol DiskOperator {
 extension DiskOperator {
   
   func fileURL() throws -> URL {
-          try FileManager.default.url(for: .documentDirectory,
-                                         in: .userDomainMask,
-                                         appropriateFor: nil,
-                                         create: false)
-              .appendingPathComponent("\(fileName).json")
+    try FileManager.default.url(for: .documentDirectory,
+                                in: .userDomainMask,
+                                appropriateFor: nil,
+                                create: false)
+    .appendingPathComponent("\(fileName).json")
   }
   
   
@@ -67,46 +68,46 @@ extension DiskOperator {
   }
   
   func save(model: Model, completion: @escaping (Result<Void, Error>)->Void) {
-          DispatchQueue.global(qos: .background).async {
-              do {
-                  let data = try JSONEncoder().encode(model)
-                  let outfile = try fileURL()
-                  try data.write(to: outfile)
-                  DispatchQueue.main.async {
-                      completion(.success(()))
-                  }
-              } catch {
-                  DispatchQueue.main.async {
-                      completion(.failure(error))
-                  }
-              }
-          }
+    DispatchQueue.global(qos: .background).async {
+      do {
+        let data = try JSONEncoder().encode(model)
+        let outfile = try fileURL()
+        try data.write(to: outfile)
+        DispatchQueue.main.async {
+          completion(.success(()))
+        }
+      } catch {
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
       }
+    }
+  }
   
   func load() async throws -> Model {
-      try await withCheckedThrowingContinuation { continuation in
-          load { result in
-              switch result {
-              case .failure(let error):
-                  continuation.resume(throwing: error)
-              case .success(let model):
-                  continuation.resume(returning: model)
-              }
-          }
+    try await withCheckedThrowingContinuation { continuation in
+      load { result in
+        switch result {
+        case .failure(let error):
+          continuation.resume(throwing: error)
+        case .success(let model):
+          continuation.resume(returning: model)
+        }
       }
+    }
   }
   
   func save(model: Model) async throws {
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-          save(model: model) { result in
-              switch result {
-              case .failure(let error):
-                  continuation.resume(throwing: error)
-              case .success:
-                continuation.resume()
-              }
-          }
+      save(model: model) { result in
+        switch result {
+        case .failure(let error):
+          continuation.resume(throwing: error)
+        case .success:
+          continuation.resume()
+        }
       }
+    }
   }
   
 }

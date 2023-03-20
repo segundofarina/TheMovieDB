@@ -17,12 +17,13 @@ class MoviesListViewModel: ObservableObject {
   
   private let apiClient: APIClient
   private var currentPage = 0
-  private let moviePersistence: MoviePersistence = MoviePersistence()
+  private let moviePersistence: MoviePersistence
   
   var state: State = .idle
   
-  init(apiClient: APIClient = APIClient.shared) {
+  init(apiClient: APIClient = APIClient.shared, moviePersistence: MoviePersistence = MoviePersistence()) {
     self.apiClient = apiClient
+    self.moviePersistence = moviePersistence
   }
   
   func fetchInitialData() {
@@ -30,6 +31,8 @@ class MoviesListViewModel: ObservableObject {
     print("Fetch initial data")
     Task {
       self.state = .fetching
+      
+      // CHECK parallel async
       let list = try await apiClient.getPopularMovies()
       self.popular = list.results
       if let page = list.page {
@@ -39,8 +42,6 @@ class MoviesListViewModel: ObservableObject {
       self.watchlist = await moviePersistence.getWatchlist()
       self.state = .fetched
     }
-    
-
   }
   
   public func addToWatchList(movie: Movie) {
@@ -49,16 +50,17 @@ class MoviesListViewModel: ObservableObject {
     }
   }
   
-  public func isLastMovie(movie: Movie) -> Bool {
-    popular.last?.id == movie.id
-  }
-  
   public func removeFromWatchList(movie: Movie) {
     watchlist.removeAll(where: {$0.id == movie.id})
   }
   
   public func isMovieInWatchList(movie: Movie) -> Bool {
     return watchlist.contains(movie)
+  }
+  
+  // Endless scroll
+  public func isLastMovie(movie: Movie) -> Bool {
+    popular.last?.id == movie.id
   }
   
   public func fetchMoreMovies() {
