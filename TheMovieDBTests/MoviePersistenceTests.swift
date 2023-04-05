@@ -14,23 +14,23 @@ final class MoviePersistenceTests: XCTestCase {
     return MoviePersistence()
   }
   
-  func test_savesMovie() {
+  func test_savesMovie() async {
     let sut = makeSut()
     let watchlist: [Movie] = [.avatar, .antMan]
-    sut.saveWatchlist(watchlist: watchlist)
-    
-    let result = sut.getWatchlist()
+    await sut.saveWatchlist(watchlist: watchlist)
+
+    let result = await sut.getWatchlist()
     
     XCTAssertEqual(watchlist, result)
   }
   
-  func test_saveTwice_loadsLast() {
+  func test_saveTwice_loadsLast() async {
     let sut = makeSut()
     let watchlist: [Movie] = [.avatar, .antMan]
-    sut.saveWatchlist(watchlist: watchlist)
+    await sut.saveWatchlist(watchlist: watchlist)
     let watchlist2: [Movie] = [.pussInBoots, .blackPanther]
-    sut.saveWatchlist(watchlist: watchlist2)
-    let result = sut.getWatchlist()
+    await sut.saveWatchlist(watchlist: watchlist2)
+    let result = await sut.getWatchlist()
     XCTAssertEqual(watchlist2, result)
   }
 
