@@ -29,6 +29,10 @@
 		79435CBF29BBD230004BB2DD /* PopularMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79435CBE29BBD230004BB2DD /* PopularMovieCell.swift */; };
 		79435CC229BBD71F004BB2DD /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79435CC129BBD71F004BB2DD /* Color+Extensions.swift */; };
 		79435CC529BFAC01004BB2DD /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79435CC429BFAC01004BB2DD /* MoviesService.swift */; };
+		7945B0BB29CB3FAD00B1B271 /* SearchListUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945B0BA29CB3FAD00B1B271 /* SearchListUIView.swift */; };
+		7945B0BD29CCA13900B1B271 /* SearchListUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945B0BC29CCA13900B1B271 /* SearchListUITableViewCell.swift */; };
+		7945B0BF29CCCB8900B1B271 /* SearchListUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945B0BE29CCCB8900B1B271 /* SearchListUIViewController.swift */; };
+		7945B0C129CCFAF400B1B271 /* SearchListViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945B0C029CCFAF400B1B271 /* SearchListViewRepresentable.swift */; };
 		7952EC6029C12CE900BE3F92 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC5F29C12CE900BE3F92 /* SearchListView.swift */; };
 		7952EC6229C275D500BE3F92 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6129C275D500BE3F92 /* SearchListCell.swift */; };
 		7952EC6529C3A7C100BE3F92 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6429C3A7C100BE3F92 /* SearchViewModel.swift */; };
@@ -77,6 +81,10 @@
 		79435CBE29BBD230004BB2DD /* PopularMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieCell.swift; sourceTree = "<group>"; };
 		79435CC129BBD71F004BB2DD /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		79435CC429BFAC01004BB2DD /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
+		7945B0BA29CB3FAD00B1B271 /* SearchListUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListUIView.swift; sourceTree = "<group>"; };
+		7945B0BC29CCA13900B1B271 /* SearchListUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListUITableViewCell.swift; sourceTree = "<group>"; };
+		7945B0BE29CCCB8900B1B271 /* SearchListUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListUIViewController.swift; sourceTree = "<group>"; };
+		7945B0C029CCFAF400B1B271 /* SearchListViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewRepresentable.swift; sourceTree = "<group>"; };
 		7952EC5F29C12CE900BE3F92 /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		7952EC6129C275D500BE3F92 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		7952EC6329C3554B00BE3F92 /* sample.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = sample.xcconfig; sourceTree = "<group>"; };
@@ -179,6 +187,7 @@
 		7904EAC929BB8805008BA747 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				7945B0B529CA5ADB00B1B271 /* SearchListUIKit */,
 				7952EC6A29C50FFC00BE3F92 /* Views */,
 				7952EC5E29C12CBC00BE3F92 /* SearchList */,
 				79435CB929BBBC64004BB2DD /* MoviesList */,
@@ -232,6 +241,17 @@
 				7952EC6629C4B1A800BE3F92 /* MoviePersistence.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		7945B0B529CA5ADB00B1B271 /* SearchListUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				7945B0BA29CB3FAD00B1B271 /* SearchListUIView.swift */,
+				7945B0BC29CCA13900B1B271 /* SearchListUITableViewCell.swift */,
+				7945B0BE29CCCB8900B1B271 /* SearchListUIViewController.swift */,
+				7945B0C029CCFAF400B1B271 /* SearchListViewRepresentable.swift */,
+			);
+			path = SearchListUIKit;
 			sourceTree = "<group>";
 		};
 		7952EC5E29C12CBC00BE3F92 /* SearchList */ = {
@@ -361,8 +381,12 @@
 				7952EC6C29C5101500BE3F92 /* CacheAsyncImage.swift in Sources */,
 				79435CBB29BBBC7E004BB2DD /* MoviesListView.swift in Sources */,
 				7904EAD429BB8DEA008BA747 /* Genre.swift in Sources */,
+				7945B0BF29CCCB8900B1B271 /* SearchListUIViewController.swift in Sources */,
 				7904EAD229BB8DEA008BA747 /* GenreList.swift in Sources */,
+				7945B0C129CCFAF400B1B271 /* SearchListViewRepresentable.swift in Sources */,
 				7904EAD329BB8DEA008BA747 /* Movie.swift in Sources */,
+				7945B0BD29CCA13900B1B271 /* SearchListUITableViewCell.swift in Sources */,
+				7945B0BB29CB3FAD00B1B271 /* SearchListUIView.swift in Sources */,
 				79435CBD29BBC762004BB2DD /* WatchlistCell.swift in Sources */,
 				7904EAD729BB9DF9008BA747 /* MovieDetailView.swift in Sources */,
 				7904EAC229BB818F008BA747 /* APIClient.swift in Sources */,

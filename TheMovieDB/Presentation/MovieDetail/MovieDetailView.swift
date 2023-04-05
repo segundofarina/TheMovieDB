@@ -33,7 +33,7 @@ struct MovieDetailView: View {
         .bold()
         .foregroundColor(.white)
         .multilineTextAlignment(.center)
-      Text(movie.releaseDate)
+      Text(movie.releaseDate ?? "")
         .foregroundColor(.white)
     }
   }

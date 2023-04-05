@@ -21,12 +21,14 @@ struct ContentView: View {
   var body: some View {
     NavigationStack {
       Group {
-        if(searchViewModel.searchQuery != "") {
-          SearchListView(movies: searchViewModel.searchedResults,
-                         isMovieInWatchList: { moviesViewModel.isMovieInWatchList(movie: $0) },
-                         addMovieToWatchList: { moviesViewModel.addToWatchList(movie: $0) },
-                         loading: searchViewModel.state == .fetching
-          )
+//        if(searchViewModel.searchQuery != "") {
+//          SearchListView(movies: searchViewModel.searchedResults,
+//                         isMovieInWatchList: { moviesViewModel.isMovieInWatchList(movie: $0) },
+//                         addMovieToWatchList: { moviesViewModel.addToWatchList(movie: $0) },
+//                         loading: searchViewModel.state == .fetching
+//          )
+        if searchViewModel.searchQuery != "" {
+          SearchListViewRepresentable(vm: searchViewModel)
         } else  {
           MoviesListView(
             watchlist: moviesViewModel.watchlist,

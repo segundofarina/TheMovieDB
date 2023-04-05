@@ -7,7 +7,7 @@ import Foundation
 struct Movie: Codable, Hashable {
   let id: Int
   let overview: String
-  let releaseDate: String
+  let releaseDate: String?
   let title: String
   let backdropPath: String?
   let posterPath: String?

@@ -17,7 +17,7 @@ struct SearchListCell: View {
     .frame(width: 48, height: 72)
   }
  
-  var buttonText: String {isMovieInWatchList ? "Added" : "+ watchlist" }
+  var buttonText: String { isMovieInWatchList ? "Added" : "+ watchlist" }
   
   var buttonView: some View {
     Button(action: addMovieToWatchList ) {
