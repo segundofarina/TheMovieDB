@@ -27,7 +27,6 @@ class APIClient {
   
   func getMovieGenres() async throws -> [Genre] {
     let endpoint = Endpoint(path: "/genre/movie/list")
-    
     return try await networkClient
       .sendRequest(endpoint: endpoint)
       .onStatus(200, decodeUsing: GenreList.self)

@@ -23,7 +23,9 @@ struct URLSessionNetworkClient: NetworkClient {
     session = URLSession(configuration: config)
   }
   
-  static func getToken() -> String {
+  /// Looks for the api token that is stored on the .xconfig file
+  /// - Returns: the api token
+  private static func getToken() -> String {
     guard let infoDictionary: [String: Any] = Bundle.main.infoDictionary else { return "" }
     guard let apiKey: String = infoDictionary["API_TOKEN"] as? String else { return "" }
     return apiKey
@@ -33,7 +35,6 @@ struct URLSessionNetworkClient: NetworkClient {
     do {
       let (data, res) = try await session.data(for: endpoint.asRequest())
       return Response(data: data, response: res, path: endpoint.url.relativePath, error: nil )
-      
     } catch {
       return Response(path: endpoint.url.relativePath, error: error)
     }

@@ -47,9 +47,6 @@ extension DiskOperator {
     .appendingPathComponent("\(fileName).json")
   }
   
-  
-  
-  
   func load(completion: @escaping (Result<Model, Error>)->Void) {
     DispatchQueue.global(qos: .background).async {
       do {

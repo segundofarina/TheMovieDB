@@ -28,7 +28,6 @@
 		79435CBD29BBC762004BB2DD /* WatchlistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79435CBC29BBC762004BB2DD /* WatchlistCell.swift */; };
 		79435CBF29BBD230004BB2DD /* PopularMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79435CBE29BBD230004BB2DD /* PopularMovieCell.swift */; };
 		79435CC229BBD71F004BB2DD /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79435CC129BBD71F004BB2DD /* Color+Extensions.swift */; };
-		79435CC529BFAC01004BB2DD /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79435CC429BFAC01004BB2DD /* MoviesService.swift */; };
 		7952EC6029C12CE900BE3F92 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC5F29C12CE900BE3F92 /* SearchListView.swift */; };
 		7952EC6229C275D500BE3F92 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6129C275D500BE3F92 /* SearchListCell.swift */; };
 		7952EC6529C3A7C100BE3F92 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7952EC6429C3A7C100BE3F92 /* SearchViewModel.swift */; };
@@ -76,7 +75,6 @@
 		79435CBC29BBC762004BB2DD /* WatchlistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistCell.swift; sourceTree = "<group>"; };
 		79435CBE29BBD230004BB2DD /* PopularMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovieCell.swift; sourceTree = "<group>"; };
 		79435CC129BBD71F004BB2DD /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		79435CC429BFAC01004BB2DD /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
 		7952EC5F29C12CE900BE3F92 /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		7952EC6129C275D500BE3F92 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		7952EC6329C3554B00BE3F92 /* sample.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = sample.xcconfig; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 		79435CC329BFABB4004BB2DD /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				79435CC429BFAC01004BB2DD /* MoviesService.swift */,
 				7952EC6629C4B1A800BE3F92 /* MoviePersistence.swift */,
 			);
 			path = Services;
@@ -373,7 +370,6 @@
 				7904EAC629BB8484008BA747 /* Response.swift in Sources */,
 				79435CBF29BBD230004BB2DD /* PopularMovieCell.swift in Sources */,
 				7952EC6729C4B1A800BE3F92 /* MoviePersistence.swift in Sources */,
-				79435CC529BFAC01004BB2DD /* MoviesService.swift in Sources */,
 				7904EAD129BB8DEA008BA747 /* MovieList.swift in Sources */,
 				7904EAC829BB84AB008BA747 /* APIError.swift in Sources */,
 			);

@@ -44,10 +44,8 @@ class ImageLoader: ObservableObject {
         isLoading = false
         return
       }
-      
       image = UIImage(data: data)
       isLoading = false
-      
     }
   }
   

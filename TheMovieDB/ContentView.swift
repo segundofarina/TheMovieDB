@@ -33,7 +33,7 @@ struct ContentView: View {
             popular: moviesViewModel.popular,
             genres: moviesViewModel.genres,
             fetchMoreMovies: moviesViewModel.fetchMoreMovies,
-            isLastMovie: moviesViewModel.isLastMovie
+            isLastMovie: { moviesViewModel.isLastMovie(movie: $0) }
           )
         }
       }
