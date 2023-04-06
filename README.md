@@ -10,7 +10,9 @@ The app was built on SwiftUI using async / await and Combine, using an MVVM arch
 
 ## Installation
 
-For running the app you will need to setup the `API token`, you can get one from [here](https://developers.themoviedb.org/3/getting-started/authentication). Note that this is different from the `API key`, `API token` was introduced in v3 of TMDB API.
+For running the app you will need an `API token`, for this you will need an account in themoviedb, you can create one [here](https://developers.themoviedb.org/3/getting-started/introduction).
+
+Once you have an account you can get the `API Read Access Token (v4 auth)` from your [account settings](https://www.themoviedb.org/settings/api). Note that this is different from the `API key`, `API token` was introduced in v3 of TMDB API, more info [here](https://developers.themoviedb.org/3/getting-started/authentication).
 
 Once you get the token you will need to setup an `.xcconfig` file. This file is not committed to not expose sensitive data.
 
