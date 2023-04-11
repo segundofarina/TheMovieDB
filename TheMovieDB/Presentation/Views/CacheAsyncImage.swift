@@ -11,7 +11,7 @@ struct CacheAsyncImage: View {
   @StateObject var imageLoader: ImageLoader
   
   init(url: String?) {
-    self._imageLoader = StateObject(wrappedValue: ImageLoader(url: url!))
+    self._imageLoader = StateObject(wrappedValue: ImageLoader(url: url ?? ""))
   }
     var body: some View {
       Group {

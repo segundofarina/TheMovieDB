@@ -12,6 +12,40 @@ struct Movie: Codable, Hashable {
   let backdropPath: String?
   let posterPath: String?
   let genreIds: [Int]
+}
+
+extension Movie {
+  static let CDN_URL: String = "https://image.tmdb.org/t/p/"
+  
+  func posterURL(size: PosterSize)-> String? {
+    guard let posterPath = posterPath else { return nil }
+    return "\(Self.CDN_URL)/\(size.rawValue)/\(posterPath)"
+  }
+  
+  func backdropURL(size: BackdropSize) -> String? {
+    guard let backdropPath = backdropPath else {return nil}
+    return "\(Self.CDN_URL)/\(size.rawValue)/\(backdropPath)"
+  }
+  
+  enum BackdropSize: String {
+    case w300
+    case w780
+    case w1280
+    case original
+  }
+  
+  enum PosterSize: String {
+    case w92
+    case w154
+    case w185
+    case w342
+    case w500
+    case w780
+    case original
+  }
+}
+
+extension Movie {
   
   enum CodingKeys: String, CodingKey  {
     case id
@@ -21,6 +55,18 @@ struct Movie: Codable, Hashable {
     case backdropPath = "backdrop_path"
     case posterPath = "poster_path"
     case genreIds = "genre_ids"
+  }
+  
+  init(from decoder: Decoder) throws {
+    let values   = try decoder.container(keyedBy: CodingKeys.self)
+    
+    id           = try values.decode(Int.self, forKey: .id)
+    overview     = try values.decode(String.self, forKey: .overview)
+    releaseDate  = try values.decodeIfPresent(String.self, forKey: .releaseDate) ?? ""
+    title        = try values.decode(String.self, forKey: .title)
+    backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath)
+    posterPath   = try values.decodeIfPresent(String.self, forKey: .posterPath)
+    genreIds     = try values.decodeIfPresent([Int].self, forKey: .genreIds) ?? []
   }
 }
 
@@ -67,7 +113,9 @@ extension Movie {
   
   static let avatar: Movie = Movie(
     id: 76600,
-    overview: "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.", releaseDate: "2022-12-14", title: "Avatar: The Way of Water",
+    overview: "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
+    releaseDate: "2022-12-14",
+    title: "Avatar: The Way of Water",
     backdropPath: "/ovM06PdF3M8wvKb06i4sjW3xoww.jpg",
     posterPath: "/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
     genreIds: [
@@ -78,7 +126,8 @@ extension Movie {
   
   static let creed: Movie = Movie(
     id: 677179,
-    overview: "After dominating the boxing world, Adonis Creed has been thriving in both his career and family life. When a childhood friend and former boxing prodigy, Damien Anderson, resurfaces after serving a long sentence in prison, he is eager to prove that he deserves his shot in the ring. The face-off between former friends is more than just a fight. To settle the score, Adonis must put his future on the line to battle Damien - a fighter who has nothing to lose.", releaseDate: "2023-03-01",
+    overview: "After dominating the boxing world, Adonis Creed has been thriving in both his career and family life. When a childhood friend and former boxing prodigy, Damien Anderson, resurfaces after serving a long sentence in prison, he is eager to prove that he deserves his shot in the ring. The face-off between former friends is more than just a fight. To settle the score, Adonis must put his future on the line to battle Damien - a fighter who has nothing to lose.",
+    releaseDate: "2023-03-01",
     title: "Creed III",
     backdropPath: "/5i6SjyDbDWqyun8klUuCxrlFbyw.jpg",
     posterPath: "/vJU3rXSP9hwUuLeq8IpfsJShLOk.jpg",

@@ -37,7 +37,7 @@ struct PopularMovieCell: View {
     
     
     .background(
-      CacheAsyncImage(url: "https://image.tmdb.org/t/p/w780/\(movie.backdropPath ?? "")")
+      CacheAsyncImage(url: movie.backdropURL(size: .w780))
       )
     .frame(height: 156)
     .frame(maxWidth: .infinity)

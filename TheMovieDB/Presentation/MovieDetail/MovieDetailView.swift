@@ -20,7 +20,7 @@ struct MovieDetailView: View {
   var image: some View {
     VStack {
       Spacer()
-      CacheAsyncImage(url: "https://image.tmdb.org/t/p/w300/\(movie.posterPath ?? "")")
+      CacheAsyncImage(url:movie.posterURL(size: .w342))
         .frame(width: scale * 150 , height: scale * 230 )
     }
     .frame(width: 2 * 150 , height: 2 * 230 )

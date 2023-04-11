@@ -10,7 +10,7 @@ import SwiftUI
 struct WatchlistCell: View {
   let movie: Movie
     var body: some View {
-      CacheAsyncImage(url: "https://image.tmdb.org/t/p/w154/\(movie.posterPath ?? "")")
+      CacheAsyncImage(url: movie.posterURL(size: .w154))
         .frame(width: 100, height: 154)
     }
 }

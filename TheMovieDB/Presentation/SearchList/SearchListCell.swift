@@ -13,7 +13,7 @@ struct SearchListCell: View {
   let addMovieToWatchList: () -> Void
   
   var imageView: some View {
-    CacheAsyncImage(url: "https://image.tmdb.org/t/p/w300/\(movie.posterPath ?? "")")
+    CacheAsyncImage(url:movie.posterURL(size: .w342))
     .frame(width: 48, height: 72)
   }
  

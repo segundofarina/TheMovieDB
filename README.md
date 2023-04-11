@@ -4,7 +4,7 @@
 
 Demo iOS App built on swiftUI for consuming movies from the [TMDB api](https://developers.themoviedb.org/3/).
 
-The app consists of a main view where it shows the most popular movies right know in a scrollable list, supports infinite scrolling, tapping on a movie shows a detail of the movie and the ability to add it to a watch list, which is persisted locally.
+The app consists of a main view where it shows the most popular movies right know in a scrollable list, supports infinite scrolling, tapping on a movie shows a detail of the movie and the ability to add it to a watch list, which is persisted locally. Also supports remote search for looking up any movie.
 
 The app was built on SwiftUI using async / await and Combine, using an MVVM architecture, URLSession for network requests, URLCache for image caching and unit testing with XCTest.
 
@@ -40,13 +40,14 @@ The APIClient will get this `Response` and similar to `Endpoint` provides an api
 
 ### Image caching
 
-The images
+The app heavily relies on images, so image caching gives a drastically better user experience. SwiftUI provides an AsyncImage view which loads up images but does not support image caching. A custom view, CacheAsyncImage, was implemented which displays images supporting caching.
+
+CacheAsyncImage holds an `ImageLoader` StateObject which makes use of URLCache and URLSession for querying and caching images.
 
 ### Persistence
 
-Protocols division for layers -> testing
-Abstracting URLSession
-Network client
-API client
-Image loader
-URL Cache
+The watch list is persisted locally. Movies are serialized as json and persisted to a file. To avoid unnecessary read and writes to the file system the list is loaded in memory when the app is foregrounded and persists to file when the app goes to background.
+
+MoviePersistence exposes two async functions for saving and getting the watch list from disk. Inside it has an instance of `WatchListDiskOperator`, which is the one who actually makes the calls to disk. This `WatchListDiskOperator` implements the `DiskOperator` protocol by only needing to provide a collection name and the type of model that will be saved which needs to be codable.
+
+`DiskOperator` is a protocol which has already implemented functions for writing and reading to files
