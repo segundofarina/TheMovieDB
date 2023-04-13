@@ -18,7 +18,7 @@ class SearchViewModel: ObservableObject {
   private let apiClient: APIClient
   private var cancellables = Set<AnyCancellable>()
   
-  init(apiClient: APIClient = APIClient.shared) {
+  init(apiClient: APIClient = APIClientImplementation.shared) {
     self.apiClient = apiClient
     $searchQuery
       .debounce(for: .seconds(0.5), scheduler: RunLoop.main)

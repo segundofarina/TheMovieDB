@@ -14,21 +14,19 @@ class MoviesListViewModel: ObservableObject {
   @Published var watchlist: [Movie] = []
   @Published var popular: [Movie] = []
   @Published var genres: [Genre] = []
+  @Published var state: State = .idle
   
   private let apiClient: APIClient
   private var currentPage = 0
   private let moviePersistence: MoviePersistence
   
-  var state: State = .idle
-  
-  init(apiClient: APIClient = APIClient.shared, moviePersistence: MoviePersistence = MoviePersistence()) {
+  init(apiClient: APIClient = APIClientImplementation.shared, moviePersistence: MoviePersistence = MoviePersistenceImplementation()) {
     self.apiClient = apiClient
     self.moviePersistence = moviePersistence
   }
   
   func fetchInitialData() {
     if state != .idle { return }
-    print("Fetch initial data")
     Task {
       self.state = .fetching
       
@@ -64,11 +62,11 @@ class MoviesListViewModel: ObservableObject {
   }
   
   public func fetchMoreMovies() {
-    if state == .fetching { return }
-    
+    if state == .fetching {
+      return
+    }
     Task  {
       state = .fetching
-      print("fetching page: \(currentPage + 1)")
       let list = try await apiClient.getPopularMovies(page: currentPage + 1)
       state = .fetched
       self.popular.append(contentsOf: list.results)

@@ -7,9 +7,22 @@
 
 import Foundation
 
-class APIClient {
+
+protocol APIClient {
+  func getPopularMovies(page: Int) async throws -> MovieList
+  func getMovieGenres() async throws -> [Genre]
+  func searchForMovie(query: String) async throws -> MovieList
+}
+
+extension APIClient {
+  func getPopularMovies() async throws -> MovieList {
+    return try await getPopularMovies(page: 1)
+  }
+}
+
+class APIClientImplementation: APIClient {
   
-  static let shared = APIClient(networkClient: URLSessionNetworkClient())
+  static let shared = APIClientImplementation(networkClient: URLSessionNetworkClient())
   
   private let networkClient: NetworkClient
   
@@ -17,7 +30,7 @@ class APIClient {
     self.networkClient = networkClient
   }
   
-  func getPopularMovies(page: Int = 1) async throws -> MovieList {
+  func getPopularMovies(page: Int) async throws -> MovieList {
     let endpoint = Endpoint(path: "/movie/popular")
       .query(key: "page", value: "\(page)")
     return try await networkClient

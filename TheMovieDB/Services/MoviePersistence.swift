@@ -8,7 +8,12 @@
 import Foundation
 
 
-struct MoviePersistence {
+protocol MoviePersistence {
+  func getWatchlist() async -> [Movie]
+  func saveWatchlist(watchlist: [Movie]) async
+}
+
+struct MoviePersistenceImplementation: MoviePersistence {
   
   struct WatchlistDiskOperator: DiskOperator {
     typealias Model = [Movie]

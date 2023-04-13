@@ -25,7 +25,7 @@ struct URLSessionNetworkClient: NetworkClient {
   
   /// Looks for the api token that is stored on the .xconfig file
   /// - Returns: the api token
-  private static func getToken() -> String {
+  static func getToken() -> String {
     guard let infoDictionary: [String: Any] = Bundle.main.infoDictionary else { return "" }
     guard let apiKey: String = infoDictionary["API_TOKEN"] as? String else { return "" }
     return apiKey

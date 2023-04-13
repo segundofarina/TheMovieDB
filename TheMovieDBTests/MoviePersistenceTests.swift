@@ -11,7 +11,7 @@ import XCTest
 final class MoviePersistenceTests: XCTestCase {
 
   func makeSut() -> MoviePersistence {
-    return MoviePersistence()
+    return MoviePersistenceImplementation()
   }
   
   func test_savesMovie() async {
