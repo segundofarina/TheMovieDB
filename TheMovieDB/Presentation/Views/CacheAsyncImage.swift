@@ -32,6 +32,6 @@ struct CacheAsyncImage: View {
 
 struct CacheAsyncImage_Previews: PreviewProvider {
     static var previews: some View {
-      CacheAsyncImage(url: Movie.avatar.backdropPath)
+      CacheAsyncImage(url: Movie.avatar.backdropURL(size: .w300))
     }
 }

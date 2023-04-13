@@ -34,7 +34,7 @@ class SearchViewModel: ObservableObject {
     
     $searchQuery
       .sink { [weak self] query in
-        if self?.state == .idle {
+        if self?.state == .idle && query != "" {
           self?.state = .fetching
         }
       }
